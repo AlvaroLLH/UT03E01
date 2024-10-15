@@ -12,27 +12,31 @@
     - Si la entrada es [2, 3, 3, 2] la salida debe ser [2, 2]
     */
 
-    // Declaración de variables
-    let salida = [0,0];
-
     // Función que toma un array y devuelve otro con el número de veces que aparece el primer elemento
     function repetidos (entrada) {
-        
-        let primer_elem = entrada[1]; // Guardamos el primer elemento en una variable
+
+        // Creamos un objeto para almacenar el número de ocurrencias
+        let conteo = {};
 
         // Recorremos el array con un for let-in para encontrar los elementos iguales al primero
-        for(let elemento in entrada){
+        for(let elemento of entrada){
 
-            if(elemento == primer_elem){
-                salida[elemento]++;
+            // Si el elemento ya existe, aumentamos el número de ocurrencias
+            if(conteo[elemento]){
+                conteo[elemento]++;
+
+                // Si no existe, lo inicializamos en 1
+            } else {
+                conteo[elemento] = 1;
             }
         }
 
-        console.log(salida);
+        // Extraemos los valores del objeto conteo (el número de ocurrencias)
+        let salida = Object.values(conteo);
+
+        // Devolvemos la salida
+        return salida;
     }
 
-    // Declaramos el array de entrada
-    let entrada = [1,2,3,3,1,1,5];
-
-    // Llamamos a la función
-    repetidos(entrada);
+    // Ejemplo de uso
+    document.write(repetidos([1,3,1,1,4,8])); // 3, 1, 1, 1 (3 veces se repite el primer elemento y hay 3 números distintos)
